@@ -26,7 +26,7 @@ public class BankTest extends TestBase {
         lastName = getRandomString(5);
     }
 
-    @Test(priority = 0, groups = {"Sanity","Regression"})
+    @Test(priority = 0, groups = {"Sanity","Smoke","Regression"})
     public void bankManagerShouldAddCustomerSuccessfully() {
         homePage.clickOnBankManagerLoginLink();
         bankManagerLoginPage.clickOnAddCustomerLink();
