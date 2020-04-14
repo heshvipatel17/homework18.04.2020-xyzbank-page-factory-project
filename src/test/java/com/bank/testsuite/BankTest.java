@@ -20,13 +20,13 @@ public class BankTest extends TestBase {
     CustomerLoginPage customerLoginPage = new CustomerLoginPage();
     AccountPage accountPage = new AccountPage();
 
-    @BeforeTest
+    @BeforeTest(groups = {"Regression","Sanity","Smoke"})
     public void setUp() {
         firstName = getRandomString(4);
         lastName = getRandomString(5);
     }
 
-    @Test(priority = 0)
+    @Test(priority = 0, groups = {"Sanity","Regression"})
     public void bankManagerShouldAddCustomerSuccessfully() {
         homePage.clickOnBankManagerLoginLink();
         bankManagerLoginPage.clickOnAddCustomerLink();
@@ -40,7 +40,7 @@ public class BankTest extends TestBase {
         alertAccept();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = {"Sanity","Regression"})
     public void bankManagerShouldOpenAccountSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnBankManagerLoginLink();
@@ -54,7 +54,7 @@ public class BankTest extends TestBase {
         alertAccept();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, groups = {"Sanity","Regression"})
     public void customerShouldLoginAndLogoutSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -67,7 +67,7 @@ public class BankTest extends TestBase {
         customerLoginPage.assertYourNameText();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = {"Smoke","Regression"})
     public void customerShouldDepositeMoneySuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -81,7 +81,7 @@ public class BankTest extends TestBase {
         accountPage.assertDepositeSuccessfulText();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = {"Smoke","Regression"})
     public void customerShouldWithdrawMoneySuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -97,7 +97,7 @@ public class BankTest extends TestBase {
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,groups = {"Smoke","Regression"})
     public void bankManagerShouldDeleteCustomerSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnBankManagerLoginLink();

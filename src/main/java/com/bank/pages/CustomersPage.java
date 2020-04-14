@@ -13,7 +13,7 @@ public class CustomersPage extends Utility {
     }
 
     public void enterCustomerThatCreatedInCustomerPage(String str) {
-        selectByVisibleTextFromDropDown(searchCustomerField, str);
+        sendTextToElement(searchCustomerField, str);
     }
 
     public void clickOnDeleteButton() {

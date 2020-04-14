@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="testsuite" verbose="1" >
-<groups>
-    <run>
-        <include name="Regression"></include>
-    </run>
-</groups>
+<suite name="Smoke" verbose="1" >
+    <groups>
+        <run>
+            <include name="Smoke"></include>
+        </run>
+    </groups>
 
     <listeners>
         <listener class-name="com.bank.listeners.Listeners"></listener>
-        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
     </listeners>
-    <test name="Login Test" >
-        <classes>
-            <class name="com.bank.testsuite.BankTest"></class>
 
+    <test name="Bank Test" >
+        <classes>
+            <class name="com.bank.testbase.TestBase"></class>
         </classes>
     </test>
 
 </suite>
-
-

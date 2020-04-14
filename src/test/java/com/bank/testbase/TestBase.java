@@ -16,7 +16,7 @@ public class TestBase extends Utility {
     String baseUrl = loadProperty.getProperty("baseUrl");
     String browser = loadProperty.getProperty("browser");
 
-    @BeforeTest
+    @BeforeTest(groups = {"Regression","Sanity","Smoke"})
     public void openBrowser() {
         browserSelector.selectBrowser(browser);
         driver.manage().window().maximize();
@@ -24,7 +24,7 @@ public class TestBase extends Utility {
         driver.get(baseUrl);
     }
 
-    @AfterTest
+    @AfterTest (groups = {"Regression","Sanity","Smoke"})
     public void tearDown() {
         driver.quit();
     }

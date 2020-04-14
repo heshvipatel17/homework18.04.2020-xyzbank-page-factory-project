@@ -245,16 +245,21 @@ public class Utility extends BasePage {
     }
 
 
-    public static String currentTimeStamp() {
+    /**
+     * This method will return current time stamp
+     * @return
+     */
+    public static String currentTimeStamp(){
         Date d = new Date();
-        return d.toString().replace(":", "").replace(" ", "");
+        return d.toString().replace(":", "_").replace(" ", "_");
     }
 
+
     /**
-     * This method will take screen shot
+     * This method will take screen shot and store into screenshot folder
      */
     public static void takeScreenShot() {
-        String filePath = System.getProperty("user.dir") + "\\src\\main\\java\\com\\demo\\nopcommerce\\screenshots\\";
+        String filePath = System.getProperty("user.dir") + "/src/main/java/screenshots/";
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File scr1 = screenshot.getScreenshotAs(OutputType.FILE);
         try {
@@ -264,30 +269,44 @@ public class Utility extends BasePage {
         }
     }
 
-    public static String takeScreenShot(String fileName) {
-        String filePath = System.getProperty("user.dir") + "/test-output/html/";
-        TakesScreenshot screenshot = (TakesScreenshot) driver;
-        File scr1 = screenshot.getScreenshotAs(OutputType.FILE);
-        String imageName = fileName + currentTimeStamp() + ".jpg";
-        String destination = filePath + imageName;
-        try {
-            FileUtils.copyFile(scr1, new File(destination));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return destination;
-    }
 
+    /**
+     * This method will take the screenshot and add to screenshot folder
+     * This method will required parameter like screenshot name and return destination path
+     * @param driver
+     * @param screenshotName
+     * @return
+     */
     public static String getScreenshot(WebDriver driver, String screenshotName) {
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
 
         // After execution, you could see a folder "FailedTestsScreenshots" under screenshot folder
-        String destination = System.getProperty("user.dir") + "\\src\\main\\java\\com\\demo\\nopcommerce\\screenshot\\" + screenshotName + dateName + ".png";
+        String destination = System.getProperty("user.dir") + "/src/main/java/screenshots/" + screenshotName + dateName + ".png";
         File finalDestination = new File(destination);
         try {
             FileUtils.copyFile(source, finalDestination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return destination;
+    }
+
+    /**
+     * This method will take the screenshot and add to test-output/html folder
+     * This method will required parameter like screenshot name and return the destination path
+     * @param fileName
+     * @return
+     */
+    public static String takeScreenShot(String fileName) {
+        String filePath = System.getProperty("user.dir") + "/test-output/html/";
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File scr1 = screenshot.getScreenshotAs(OutputType.FILE);
+        String imageName = fileName+currentTimeStamp()+".jpg";
+        String destination = filePath + imageName;
+        try {
+            FileUtils.copyFile(scr1, new File(destination));
         } catch (IOException e) {
             e.printStackTrace();
         }
