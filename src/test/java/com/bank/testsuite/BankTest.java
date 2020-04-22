@@ -3,6 +3,7 @@ package com.bank.testsuite;
 import com.bank.loadproperty.LoadProperty;
 import com.bank.pages.*;
 import com.bank.testbase.TestBase;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -11,17 +12,31 @@ public class BankTest extends TestBase {
     String firstName = null;
     String lastName = null;
 
-    LoadProperty loadProperty = new LoadProperty();
-    HomePage homePage = new HomePage();
-    BankManagerLoginPage bankManagerLoginPage = new BankManagerLoginPage();
-    AddCustomerPage addCustomerPage = new AddCustomerPage();
-    OpenAccountPage openAccountPage = new OpenAccountPage();
-    CustomersPage customersPage = new CustomersPage();
-    CustomerLoginPage customerLoginPage = new CustomerLoginPage();
-    AccountPage accountPage = new AccountPage();
+    LoadProperty loadProperty;
+    HomePage homePage;
+    BankManagerLoginPage bankManagerLoginPage;
+    AddCustomerPage addCustomerPage;
+    OpenAccountPage openAccountPage;
+    CustomersPage customersPage;
+    CustomerLoginPage customerLoginPage;
+    AccountPage accountPage;
+
+    @BeforeMethod(groups = {"Regression", "Smoke", "Sanity"})
+    public void setUp() {
+        loadProperty = new LoadProperty();
+        homePage = new HomePage();
+        bankManagerLoginPage = new BankManagerLoginPage();
+        addCustomerPage = new AddCustomerPage();
+        openAccountPage = new OpenAccountPage();
+        customersPage = new CustomersPage();
+        customerLoginPage = new CustomerLoginPage();
+        accountPage = new AccountPage();
+
+    }
+
 
     @BeforeTest(groups = {"Regression","Sanity","Smoke"})
-    public void setUp() {
+    public void setUp1() {
         firstName = getRandomString(4);
         lastName = getRandomString(5);
     }
@@ -34,10 +49,8 @@ public class BankTest extends TestBase {
         addCustomerPage.enterLastName(lastName);
         addCustomerPage.enterPostCode("HA3");
         addCustomerPage.clickOnAddCustomerButton();
-//        Alert alert = driver.switchTo().alert();
-//        Assert.assertTrue(alert.getText().contains("Customer added successfully"));
         addCustomerPage.verifyMessageFromPopupOnAddCustomerPage("Customer added successfully with customer id :");
-        alertAccept();
+     //   alertAccept();
     }
 
     @Test(priority = 1, groups = {"Sanity","Regression"})
@@ -51,7 +64,7 @@ public class BankTest extends TestBase {
         openAccountPage.clickOnSearchCurrencyFieldPound("Pound");
         openAccountPage.clickOnProcessButton();
         openAccountPage.verifyMessageFromPopupOnOpenAccountPage("Account created successfully with account Number :");
-        alertAccept();
+    //    alertAccept();
     }
 
     @Test(priority = 2, groups = {"Sanity","Regression"})
@@ -60,11 +73,10 @@ public class BankTest extends TestBase {
         homePage.clickOnCustomerLoginLink();
         openAccountPage.clickOnSearchCustomerField();
         openAccountPage.enterCustomerThatCreatedInFirstTest(firstName + " " + lastName);
-        //  customerLoginPage.clickOnSearchCreatedCustomerName();
         customerLoginPage.clickOnLoginButton();
-        accountPage.assertLogOutText();
+        accountPage.assertLogOutText("Logout");
         accountPage.clickOnLogOutButton();
-        customerLoginPage.assertYourNameText();
+        customerLoginPage.assertYourNameText("Your Name :");
     }
 
     @Test(priority = 3, groups = {"Smoke","Regression"})
@@ -78,7 +90,7 @@ public class BankTest extends TestBase {
         accountPage.clickOnDepositeTab();
         accountPage.enterdDepositAmount100(100);
         accountPage.clickOnDepositeButton();
-        accountPage.assertDepositeSuccessfulText();
+        accountPage.assertDepositeSuccessfulText("Deposit Successful");
     }
 
     @Test(priority = 4, groups = {"Smoke","Regression"})
@@ -90,9 +102,9 @@ public class BankTest extends TestBase {
         //  customerLoginPage.clickOnSearchCreatedCustomerName();
         customerLoginPage.clickOnLoginButton();
         accountPage.clickOnWithdrawlTab();
-        accountPage.enterWithdrawlAmount50();
+        accountPage.enterWithdrawlAmount50("50");
         accountPage.clicOnWithdrawlButton();
-        accountPage.assertTransactionSuccessfulText();
+        accountPage.assertTransactionSuccessfulText("Transaction successful");
 
 
     }

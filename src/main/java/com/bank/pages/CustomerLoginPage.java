@@ -1,34 +1,36 @@
 package com.bank.pages;
 
 import com.bank.utility.Utility;
-import org.openqa.selenium.By;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
 
 public class CustomerLoginPage extends Utility {
-    By searchCreatedcustomerName = By.xpath("//select[@id='userSelect']");
-    By loginBtn = By.xpath("//button[@class='btn btn-default']");
 
-    By verifyYourNameText = By.xpath("//label[contains(text(),'Your Name :')]");
+    private static final Logger log = LogManager.getLogger(CustomerLoginPage.class.getName());
 
-//    public void clickOnSearchCreatedCustomerName() {
-//        clickOnElement(searchCreatedcustomerName);
-//        selectByVisibleTextFromDropDown(searchCreatedcustomerName, "Jitu Patel");
-//    }
-//    public void clickOnSearchCustomerField() {
-//        clickOnElement(searchCreatedcustomerName);
-//    }
-//
-//    public void enterCustomerThatCreatedInFirstTest() {
-//        selectByVisibleTextFromDropDown(searchCustomerField, "Jitu Patel");
-//
-//    }
+    @FindBy(xpath = "//select[@id='userSelect']")
+    WebElement _searchCreatedcustomerName;
+
+    @FindBy(xpath = "//button[@class='btn btn-default']")
+    WebElement _loginBtn;
+
+    @FindBy(xpath = "//label[contains(text(),'Your Name :')]")
+    WebElement _verifyYourNameText;
+
 
     public void clickOnLoginButton() {
-        clickOnElement(loginBtn);
+        Reporter.log(" Clicking onn login button" + _loginBtn.toString() + "<br>");
+        clickOnElement(_loginBtn);
+        log.info(" Clicking onn login button" + _loginBtn.toString());
     }
 
 
-
-    public void assertYourNameText() {
-        verifyText(verifyYourNameText, "Your Name :");
+    public void assertYourNameText(String yourNameTxt) {
+        Reporter.log("Verify your name text " + yourNameTxt + " displayed on login page" + _verifyYourNameText.toString() + "<br>");
+        verifyText(_verifyYourNameText, "Your Name :");
+        log.info("Verify your name text " + yourNameTxt + " displayed on login page" + _verifyYourNameText.toString());
     }
 }

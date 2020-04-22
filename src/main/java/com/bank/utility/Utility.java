@@ -156,6 +156,13 @@ public class Utility extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(by)));
     }
+    /**
+     * This method will used to wait web driver until element become clickable
+     */
+    public void waitUntilElementToBeClickable(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
 
     /**
      * This method will used to wait web driver until presence of element located by locator
