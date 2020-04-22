@@ -3,6 +3,7 @@ package com.bank.pages;
 import com.bank.utility.Utility;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -43,17 +44,27 @@ public class AddCustomerPage extends Utility {
     }
 
     public void clickOnAddCustomerButton() {
-        waitUntilElementToBeClickable(_addCustomerbtn, 10);
         Reporter.log(" Clicking on add customer button " + _addCustomerbtn.toString() + "<br>");
+        waitUntilElementToBeClickable(_addCustomerbtn, 10);
         clickOnElement(_addCustomerbtn);
-        log.info(" Clicking on add customer button " + _addCustomerbtn.toString());
+//        log.info(" Clicking on add customer button " + _addCustomerbtn.toString());
     }
 
     public void verifyMessageFromPopupOnAddCustomerPage(String str) {
-        String actualMessage = alertGetText();
+
+        Alert alert = driver.switchTo().alert();
+        String actualMessage = alert.getText();
         String expectedMessage = "Customer added successfully with customer id :";
         Assert.assertTrue(actualMessage.contains(expectedMessage), str);
-        alertAccept();
+    //    alertAccept();
+
+    }
+
+    public void addcustomerData(String fName, String lName, String pCode) {
+        enterFirstName(fName);
+        enterLastName(lName);
+        enterPostCode(pCode);
+        clickOnAddCustomerButton();
 
     }
 

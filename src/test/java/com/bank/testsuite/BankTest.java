@@ -35,13 +35,13 @@ public class BankTest extends TestBase {
     }
 
 
-    @BeforeTest(groups = {"Regression","Sanity","Smoke"})
+    @BeforeTest(groups = {"Regression", "Sanity", "Smoke"})
     public void setUp1() {
         firstName = getRandomString(4);
         lastName = getRandomString(5);
     }
 
-    @Test(priority = 0, groups = {"Sanity","Smoke","Regression"})
+    @Test(priority = 0, groups = {"Sanity", "Smoke", "Regression"})
     public void bankManagerShouldAddCustomerSuccessfully() {
         homePage.clickOnBankManagerLoginLink();
         bankManagerLoginPage.clickOnAddCustomerLink();
@@ -50,10 +50,10 @@ public class BankTest extends TestBase {
         addCustomerPage.enterPostCode("HA3");
         addCustomerPage.clickOnAddCustomerButton();
         addCustomerPage.verifyMessageFromPopupOnAddCustomerPage("Customer added successfully with customer id :");
-     //   alertAccept();
+        alertAccept();
     }
 
-    @Test(priority = 1, groups = {"Sanity","Regression"})
+    @Test(priority = 1, groups = {"Sanity", "Regression"})
     public void bankManagerShouldOpenAccountSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnBankManagerLoginLink();
@@ -64,10 +64,10 @@ public class BankTest extends TestBase {
         openAccountPage.clickOnSearchCurrencyFieldPound("Pound");
         openAccountPage.clickOnProcessButton();
         openAccountPage.verifyMessageFromPopupOnOpenAccountPage("Account created successfully with account Number :");
-    //    alertAccept();
+        alertAccept();
     }
 
-    @Test(priority = 2, groups = {"Sanity","Regression"})
+    @Test(priority = 2, groups = {"Sanity", "Regression"})
     public void customerShouldLoginAndLogoutSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -79,7 +79,7 @@ public class BankTest extends TestBase {
         customerLoginPage.assertYourNameText("Your Name :");
     }
 
-    @Test(priority = 3, groups = {"Smoke","Regression"})
+    @Test(priority = 3, groups = {"Smoke", "Regression"})
     public void customerShouldDepositeMoneySuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -93,7 +93,7 @@ public class BankTest extends TestBase {
         accountPage.assertDepositeSuccessfulText("Deposit Successful");
     }
 
-    @Test(priority = 4, groups = {"Smoke","Regression"})
+    @Test(priority = 4, groups = {"Smoke", "Regression"})
     public void customerShouldWithdrawMoneySuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnCustomerLoginLink();
@@ -109,7 +109,7 @@ public class BankTest extends TestBase {
 
     }
 
-    @Test(priority = 5,groups = {"Smoke","Regression"})
+    @Test(priority = 5, groups = {"Smoke", "Regression"})
     public void bankManagerShouldDeleteCustomerSuccessfully() {
         homePage.clickOnHomeButton();
         homePage.clickOnBankManagerLoginLink();
@@ -118,4 +118,6 @@ public class BankTest extends TestBase {
         customersPage.enterCustomerThatCreatedInCustomerPage(firstName);
         customersPage.clickOnDeleteButton();
     }
+
+
 }

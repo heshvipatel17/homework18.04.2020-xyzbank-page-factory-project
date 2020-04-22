@@ -50,18 +50,16 @@ public class OpenAccountPage extends Utility {
     public void clickOnProcessButton() {
         Reporter.log("Clicking on process button" + _processBtn.toString()+"<br>");
         clickOnElement(_processBtn);
-        log.info("Clicking onprocess button" + _processBtn.toString());
+    //    log.info("Clicking onprocess button" + _processBtn.toString());
     }
 
     public void verifyMessageFromPopupOnOpenAccountPage(String str) {
         String actualMessage = alertGetText();
         String expectedMessage = "Account created successfully with account Number :";
         Assert.assertTrue(actualMessage.contains(expectedMessage), str);
-        alertAccept();
+    //    alertAccept();
 
 
     }
 
-    public void clickOkToPopUpButtonOnOpenAccountPage() {
-    }
 }

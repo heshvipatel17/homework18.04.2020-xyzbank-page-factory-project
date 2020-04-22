@@ -19,6 +19,13 @@
         </classes>
     </test>
 
+    <test name="Login Test With Data Provider" >
+        <classes>
+            <class name="com.bank.testsuite.LoginTestWithDataProvider"></class>
+
+        </classes>
+    </test>
+
 </suite>
 
 
